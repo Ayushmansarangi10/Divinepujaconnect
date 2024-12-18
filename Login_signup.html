@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign-Up - DevinePujaConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed; /* Makes the navbar fixed at the top */
+            top: 0; /* Aligns it to the top */
+            left: 0; /* Aligns it to the left edge */
+            width: 100%; /* Ensures it spans the entire width */
+            z-index: 1000; /* Keeps it above other elements */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 7px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .navbar .logo-container img {
+            max-width: 50px;
+            height: auto;
+            margin-bottom: 2px;
+            border-radius: 50%;
+        }
+
+        .navbar .logo-container .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .menu li {
+            position: relative;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .menu .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .menu .dropdown li {
+            width: 200px;
+        }
+
+        .navbar .menu .dropdown a {
+            display: block;
+            padding: 8px 12px;
+        }
+
+        .navbar .menu li:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .user-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .user-options a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .user-options a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .profile-dropdown {
+            position: relative;
+            right: 15px;
+        }
+
+        .navbar .profile-dropdown .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .profile-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .profile-dropdown .dropdown a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar .profile-dropdown .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        /* body section */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .hero {
+            background: url('spiritual-background.jpg') no-repeat center center/cover;
+            text-align: center;
+            color: white;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 40px 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-box {
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+        }
+
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-box label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-box input[type="text"],
+        .form-box input[type="email"],
+        .form-box input[type="password"],
+        .form-box input[type="tel"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-box button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-box .links {
+            text-align: center;
+        }
+
+        .form-box .links a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .form-box .links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-login button {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social-login .google {
+            background-color: #DB4437;
+            color: white;
+        }
+
+        .social-login .facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Devine Puja Connect Logo">
+            <a href="#" class="logo">DevinePujaConnect</a>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+            <li><a href="Service.html">Services</a></li>
+            <li>
+                <a href="#">Categories</a>
+                <ul class="dropdown">
+                    <li><a href="#">Temple Pujas</a></li>
+                    <li><a href="#">At-Home Pujas</a></li>
+                    <li><a href="#">Virtual Pujas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Pujas</a>
+                <ul class="dropdown">
+                    <li><a href="#">Wedding Pujas</a></li>
+                    <li><a href="#">Griha Pravesh</a></li>
+                    <li><a href="#">Satyanarayan Puja</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Temples</a></li>
+            <li><a href="#">Priests</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        <div class="user-options">
+            <a href="Login_signup.html">Login/Sign Up</a>
+            <div class="profile-dropdown">
+                <a href="#">Profile</a>
+                <ul class="dropdown">
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to DevinePujaConnect!</h1>
+        <p>Sign in to access your account or create a new one to explore the divine.</p>
+    </section>
+
+    <!-- Login and Sign-Up Section -->
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-box">
+            <h2>Login</h2>
+            <form>
+                <label for="login-email">Email/Phone Number</label>
+                <input type="text" id="login-email" placeholder="Enter your email or phone number" required>
+
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+
+                <button type="submit">Log In</button>
+
+                <div class="links">
+                    <a href="#">Forgot Password?</a><br>
+                    <a href="#">New to DevinePujaConnect? Create an Account</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sign-Up Form -->
+        <div class="form-box">
+            <h2>Sign Up</h2>
+            <form>
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" placeholder="Enter your full name" required>
+
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required>
+
+                <label for="signup-phone">Phone Number (Optional)</label>
+                <input type="tel" id="signup-phone" placeholder="Enter your phone number">
+
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Create a password" required>
+
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
+
+                <button type="submit">Sign Up</button>
+
+                <div class="social-login">
+                    <button class="google">Sign up with Google</button>
+                    <button class="facebook">Sign up with Facebook</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Temples</a></li>
+                <li><a href="#">Priests</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="footer-section">
+            <h3>Legal Links</h3>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Refund & Cancellation Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a></p>
+            <p>Phone: +91-XXXXXXXXXX</p>
+            <p>Address: (Optional)</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="footer-section cta-section">
+            <p>Join 10,000+ devotees in connecting with temples and priests today!</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Copyright Notice -->
+    <div class="footer-bottom">
+        <p>© 2024 DevinePujaConnect.com. All rights reserved.</p>
+    </div>
+</footer>
+</html>

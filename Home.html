@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevinePujaConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed; /* Makes the navbar fixed at the top */
+            top: 0; /* Aligns it to the top */
+            left: 0; /* Aligns it to the left edge */
+            width: 100%; /* Ensures it spans the entire width */
+            z-index: 1000; /* Keeps it above other elements */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 7px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .navbar .logo-container img {
+            max-width: 50px;
+            height: auto;
+            margin-bottom: 2px;
+            border-radius: 50%;
+        }
+
+        .navbar .logo-container .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .menu li {
+            position: relative;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .menu .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .menu .dropdown li {
+            width: 200px;
+        }
+
+        .navbar .menu .dropdown a {
+            display: block;
+            padding: 8px 12px;
+        }
+
+        .navbar .menu li:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .user-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .user-options a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .user-options a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .profile-dropdown {
+            position: relative;
+            right: 15px;
+        }
+
+        .navbar .profile-dropdown .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .profile-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .profile-dropdown .dropdown a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar .profile-dropdown .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            background-image: url('hero image.webp'); /* Path to the image you want to add */
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center; /* Centers the image */
+            text-align: center;
+            padding: 140px 20px;
+            color: white; /* Text color to ensure readability on the image */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #070707;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #424141;
+        }
+
+        .hero .cta-buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+
+        .hero .cta-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Highlights Section Styling */
+        .highlights {
+            background-color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .highlights .stat {
+            display: inline-block;
+            margin: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* How It Works Section Styling */
+        .how-it-works {
+            background-color: #f9fafb;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .how-it-works .step {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .how-it-works .step img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
+        /* Featured Pujas */
+        .featured-pujas{
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f3f4f6;
+        }
+
+        .featured-pujas .puja {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .featured-pujas .puja img{
+            max-width: 150px;
+            border-radius: 10px;
+        }
+
+        /*Temple Highlights Styling */
+        .temple-highlights {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f7f8f9;
+        }
+
+        .temple-highlights .temple {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .temple-highlights .temple img {
+            max-width: 150px;
+            border-radius: 10px;
+        }
+
+        /* Why Choose Us Section Styling */
+        .why-choose-us {
+            background-color: #f3f4f6;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .why-choose-us ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .why-choose-us ul li {
+            display: inline-block;
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        /* Testimonials Section Styling */
+        .testimonials {
+            background-color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .testimonials .testimonial {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .testimonials .testimonial img {
+            max-width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Newsletter Section Styling */
+        .newsletter {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .newsletter input[type="email"] {
+            padding: 10px;
+            width: 300px;
+            max-width: 90%;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .newsletter button {
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .newsletter button:hover {
+            background-color: #003f7f;
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Devine Puja Connect Logo">
+            <a href="#" class="logo">DevinePujaConnect</a>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+            <li><a href="Service.html">Services</a></li>
+            <li>
+                <a href="#">Categories</a>
+                <ul class="dropdown">
+                    <li><a href="#">Temple Pujas</a></li>
+                    <li><a href="#">At-Home Pujas</a></li>
+                    <li><a href="#">Virtual Pujas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Pujas</a>
+                <ul class="dropdown">
+                    <li><a href="#">Wedding Pujas</a></li>
+                    <li><a href="#">Griha Pravesh</a></li>
+                    <li><a href="#">Satyanarayan Puja</a></li>
+                </ul>
+            </li>
+            <li><a href="Temple.html">Temples</a></li>
+            <li><a href="Prist_section.html">Priests</a></li>
+            <li><a href="Contact_us.html">Contact Us</a></li>
+        </ul>
+        <div class="user-options">
+            <a href="Login_signup.html">Login/Sign Up</a>
+            <div class="profile-dropdown">
+                <a href="#">Profile</a>
+                <ul class="dropdown">
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Connect to Divinity Anytime, Anywhere</h1>
+        <p>Experience spiritual connection from the comfort of your home.</p>
+        <div class="cta-buttons">
+            <a href="#">Book a Puja Now</a>
+            <a href="#">Learn More About Us</a>
+        </div>
+    </section>
+
+    <section class="highlights">
+        <div class="stat">500+ Registered Priests</div>
+        <div class="stat">1000+ Temples Connected</div>
+        <div class="stat">10,000+ Happy Devotees</div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="step">
+            <img src="search-icon.png" alt="Search">
+            <p>Search for temples, pujas, or priests.</p>
+        </div>
+        <div class="step">
+            <img src="payment-icon.png" alt="Payment">
+            <p>Book and make payments online.</p>
+        </div>
+        <div class="step">
+            <img src="confirmation-icon.png" alt="Confirmation">
+            <p>Receive confirmation and enjoy the service.</p>
+        </div>
+    </section>
+
+    <section class="featured-pujas">
+        <h2>Featured Pujas</h2>
+        <div class="puja">
+            <img src="puja1.jpg" alt="Puja 1">
+            <p>Wedding Puja</p>
+            <a href="#">Book Now</a>
+        </div>
+        <div class="puja">
+            <img src="puja2.jpg" alt="Puja 2">
+            <p>Griha Pravesh</p>
+            <a href="#">Book Now</a>
+        </div>
+        <div class="puja">
+            <img src="puja3.jpg" alt="Puja 3">
+            <p>Satyanarayan Puja</p>
+            <a href="#">Book Now</a>
+        </div>
+    </section>
+
+    <section class="temple-highlights">
+        <h2>Temple Highlights</h2>
+        <div class="temple">
+            <img src="temple1.jpg" alt="Temple 1">
+            <p>Famous Temple 1</p>
+        </div>
+        <div class="temple">
+            <img src="temple2.jpg" alt="Temple 2">
+            <p>Famous Temple 2</p>
+        </div>
+        <div class="temple">
+            <img src="temple3.jpg" alt="Temple 3">
+            <p>Famous Temple 3</p>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <ul>
+            <li>Verified Priests</li>
+            <li>Transparent Pricing</li>
+            <li>Nationwide Coverage</li>
+        </ul>
+    </section>
+
+    <section class="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+            <img src="user1.jpg" alt="User 1">
+            <p>Amazing experience! Highly recommended.</p>
+            <p>★★★★★</p>
+        </div>
+        <div class="testimonial">
+            <img src="user2.jpg" alt="User 2">
+            <p>Very professional and authentic service.</p>
+            <p>★★★★★</p>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form>
+            <input type="email" placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+</body>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Temples</a></li>
+                <li><a href="#">Priests</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="footer-section">
+            <h3>Legal Links</h3>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Refund & Cancellation Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a></p>
+            <p>Phone: +91-XXXXXXXXXX</p>
+            <p>Address: (Optional)</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="footer-section cta-section">
+            <p>Join 10,000+ devotees in connecting with temples and priests today!</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Copyright Notice -->
+    <div class="footer-bottom">
+        <p>© 2024 DevinePujaConnect.com. All rights reserved.</p>
+    </div>
+</footer>
+</html>

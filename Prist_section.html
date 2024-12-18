@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priest Booking Platform</title>
+    <style>
+         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed; /* Makes the navbar fixed at the top */
+            top: 0; /* Aligns it to the top */
+            left: 0; /* Aligns it to the left edge */
+            width: 100%; /* Ensures it spans the entire width */
+            z-index: 1000; /* Keeps it above other elements */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 7px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .navbar .logo-container img {
+            max-width: 50px;
+            height: auto;
+            margin-bottom: 2px;
+            border-radius: 50%;
+        }
+
+        .navbar .logo-container .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .menu li {
+            position: relative;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .menu .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .menu .dropdown li {
+            width: 200px;
+        }
+
+        .navbar .menu .dropdown a {
+            display: block;
+            padding: 8px 12px;
+        }
+
+        .navbar .menu li:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .user-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .user-options a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .user-options a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .profile-dropdown {
+            position: relative;
+            right: 15px;
+        }
+
+        .navbar .profile-dropdown .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .profile-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .profile-dropdown .dropdown a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar .profile-dropdown .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 140px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+        }
+        .cta-buttons {
+            margin-top: 20px;
+        }
+        .cta-buttons button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cta-buttons button:hover {
+            background: #555;
+        }
+        .container {
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+            color: #ff7e5f;
+        }
+        .categories, .featured-priests {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1 1 calc(33.333% - 20px);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 50%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card button {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .card button:hover {
+            background: #feb47b;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .steps div {
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Devine Puja Connect Logo">
+            <a href="#" class="logo">DevinePujaConnect</a>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+            <li><a href="Service.html">Services</a></li>
+            <li>
+                <a href="#">Categories</a>
+                <ul class="dropdown">
+                    <li><a href="#">Temple Pujas</a></li>
+                    <li><a href="#">At-Home Pujas</a></li>
+                    <li><a href="#">Virtual Pujas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Pujas</a>
+                <ul class="dropdown">
+                    <li><a href="#">Wedding Pujas</a></li>
+                    <li><a href="#">Griha Pravesh</a></li>
+                    <li><a href="#">Satyanarayan Puja</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Temples</a></li>
+            <li><a href="#">Priests</a></li>
+            <li><a href="Contact_us.html">Contact Us</a></li>
+        </ul>
+        <div class="user-options">
+            <a href="Login_signup.html">Login/Sign Up</a>
+            <div class="profile-dropdown">
+                <a href="#">Profile</a>
+                <ul class="dropdown">
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- body container -->
+    <header>
+        <h1>Connect with Experienced Priests for Every Ritual</h1>
+        <p>Book skilled priests for traditional pujas and ceremonies at home, temples, or online.</p>
+        <div class="cta-buttons">
+            <button>Find a Priest Near You</button>
+            <button>Book a Priest Now</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section categories">
+            <h2>Priest Categories</h2>
+            <div class="card">
+                <img src="priest1.jpg" alt="Vedic Rituals">
+                <h3>Vedic Rituals</h3>
+                <p>Specialists in Vedic pujas and yagnas.</p>
+                <button>View Priests</button>
+            </div>
+            <div class="card">
+                <img src="priest2.jpg" alt="Tamil Priests">
+                <h3>Tamil Priests</h3>
+                <p>Tamil-speaking priests for all ceremonies.</p>
+                <button>View Priests</button>
+            </div>
+            <div class="card">
+                <img src="priest3.jpg" alt="Online Pujas">
+                <h3>Online Pujas</h3>
+                <p>Available for virtual rituals and consultations.</p>
+                <button>View Priests</button>
+            </div>
+        </section>
+
+        <section class="section featured-priests">
+            <h2>Featured Priests</h2>
+            <div class="card">
+                <img src="priest4.jpg" alt="Priest Name">
+                <h3>Sharma Ji</h3>
+                <p>Location: Bangalore</p>
+                <p>Expertise: Griha Pravesh, Satyanarayan Puja</p>
+                <p>Rating: ★★★★★</p>
+                <button>Book Now</button>
+            </div>
+            <div class="card">
+                <img src="priest5.jpg" alt="Priest Name">
+                <h3>Panditji</h3>
+                <p>Location: Delhi</p>
+                <p>Expertise: Wedding Ceremonies, Astrology</p>
+                <p>Rating: ★★★★☆</p>
+                <button>Book Now</button>
+            </div>
+        </section>
+
+        <section class="section steps">
+            <h2>How It Works</h2>
+            <div>
+                <h3>Step 1</h3>
+                <p>Search and select a priest based on expertise, language, or location.</p>
+            </div>
+            <div>
+                <h3>Step 2</h3>
+                <p>Choose the date, time, and type of ritual.</p>
+            </div>
+            <div>
+                <h3>Step 3</h3>
+                <p>Share additional requirements (if any).</p>
+            </div>
+            <div>
+                <h3>Step 4</h3>
+                <p>Make a secure payment.</p>
+            </div>
+            <div>
+                <h3>Step 5</h3>
+                <p>Receive confirmation and connect with the priest.</p>
+            </div>
+        </section>
+    </div>
+</body>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Temples</a></li>
+                <li><a href="#">Priests</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="footer-section">
+            <h3>Legal Links</h3>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Refund & Cancellation Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a></p>
+            <p>Phone: +91-XXXXXXXXXX</p>
+            <p>Address: (Optional)</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="footer-section cta-section">
+            <p>Join 10,000+ devotees in connecting with temples and priests today!</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Copyright Notice -->
+    <div class="footer-bottom">
+        <p>© 2024 DevinePujaConnect.com. All rights reserved.</p>
+    </div>
+</footer>
+</html>

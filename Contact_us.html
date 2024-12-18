@@ -1,0 +1,588 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+    position: fixed; /* Makes the navbar fixed at the top */
+    top: 0; /* Aligns it to the top */
+    left: 0; /* Aligns it to the left edge */
+    width: 100%; /* Ensures it spans the entire width */
+    z-index: 1000; /* Keeps it above other elements */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 7px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .navbar .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    }
+
+    .navbar .logo-container img {
+    max-width: 50px;
+    height: auto;
+    margin-bottom: 2px;
+    border-radius: 50%;
+    }
+
+    .navbar .logo-container .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    }
+
+    .navbar .menu {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+
+    .navbar .menu li {
+    position: relative;
+    }
+
+    .navbar .menu a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    }
+
+    .navbar .menu a:hover {
+    background-color: #ddd;
+    }
+
+    .navbar .menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+
+    .navbar .menu .dropdown li {
+    width: 200px;
+    }
+
+    .navbar .menu .dropdown a {
+    display: block;
+    padding: 8px 12px;
+    }
+
+    .navbar .menu li:hover .dropdown {
+    display: block;
+    }
+
+    .navbar .user-options {
+    display: flex;
+    gap: 15px;
+    }
+
+    .navbar .user-options a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    }
+
+    .navbar .user-options a:hover {
+    background-color: #ddd;
+    }
+
+    .navbar .profile-dropdown {
+    position: relative;
+    right: 15px;
+    }
+
+    .navbar .profile-dropdown .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+
+    .navbar .profile-dropdown:hover .dropdown {
+    display: block;
+    }
+
+    .navbar .profile-dropdown .dropdown a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: black;
+    }
+
+    .navbar .profile-dropdown .dropdown a:hover {
+    background-color: #ddd;
+    }
+
+    /* Body design */
+    body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('contact image.jpg') no-repeat center/cover;
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center;
+    text-align: center;
+    color: white;
+    padding: 160px 20px;
+    }
+
+    .hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    }
+
+    .hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    }
+
+    .hero button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    .hero button:hover {
+    background-color: #e64a19;
+    }
+
+    /* Contact Information Section */
+    .contact-info {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    }
+
+    .contact-info div {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    }
+
+    .contact-info div a {
+    text-decoration: none;
+    color: #ff5722;
+    font-weight: bold;
+    }
+
+    /* Contact Form Section */
+    .contact-form {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    }
+
+    .contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    }
+
+    .contact-form button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    }
+
+    .contact-form button:hover {
+    background-color: #e64a19;
+    }
+
+    /* FAQ Section */
+    .faqs {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    }
+
+    .faqs h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    }
+
+    .faqs .faq-item {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    }
+
+    .faqs .faq-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ff5722;
+    }
+
+    /* Feedback Section */
+    .feedback {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ff5722;
+    color: white;
+    }
+
+    .feedback h2 {
+    margin-bottom: 15px;
+    }
+
+    .feedback a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 5px;
+    }
+
+    .feedback a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Footer Section */
+    footer {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    }
+
+    footer .social-icons a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    }
+
+    footer .social-icons a:hover {
+    text-decoration: underline;
+    }
+    /* Footer Container */
+    .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    }
+
+    .footer-section {
+    flex: 1 1 200px;
+    margin: 10px;
+    }
+
+    .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #f3f3f3;
+    }
+
+    .footer-section ul {
+    list-style: none;
+    padding: 0;
+    }
+
+    .footer-section ul li {
+    margin-bottom: 8px;
+    }
+
+    .footer-section ul li a {
+    color: #ddd;
+    text-decoration: none;
+    }
+
+    .footer-section ul li a:hover {
+    text-decoration: underline;
+    }
+
+    /* Social Icons */
+    .social-icons {
+    display: flex;
+    gap: 10px;
+    }
+
+    .social-icons img {
+    width: 24px;
+    height: 24px;
+    }
+
+    /* Call-to-Action Section */
+    .cta-section {
+    text-align: center;
+    margin-top: 20px;
+    }
+
+    .cta-section p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    }
+
+    .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    }
+
+    .cta-button:hover {
+    background-color: #0056b3;
+    }
+
+    /* Footer Bottom */
+    .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    font-size: 14px;
+    }
+</style>
+<body>
+<nav class="navbar">
+<div class="logo-container">
+    <img src="logo.jpg" alt="Devine Puja Connect Logo">
+    <a href="#" class="logo">DevinePujaConnect</a>
+</div>
+<ul class="menu">
+    <li><a href="#">Home</a></li>
+    <li><a href="Aboutus.html">About Us</a></li>
+    <li><a href="Service.html">Services</a></li>
+    <li>
+        <a href="#">Categories</a>
+        <ul class="dropdown">
+            <li><a href="#">Temple Pujas</a></li>
+            <li><a href="#">At-Home Pujas</a></li>
+            <li><a href="#">Virtual Pujas</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">Pujas</a>
+        <ul class="dropdown">
+            <li><a href="#">Wedding Pujas</a></li>
+            <li><a href="#">Griha Pravesh</a></li>
+            <li><a href="#">Satyanarayan Puja</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Temples</a></li>
+    <li><a href="#">Priests</a></li>
+    <li><a href="#">Contact Us</a></li>
+</ul>
+<div class="user-options">
+    <a href="Login_signup.html">Login/Sign Up</a>
+    <div class="profile-dropdown">
+        <a href="#">Profile</a>
+        <ul class="dropdown">
+            <li><a href="#">My Bookings</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="hero">
+<h1>We’re Here to Help!</h1>
+<p>Got questions, feedback, or need assistance? Reach out to us anytime.</p>
+<button>Contact Support</button>
+</section>
+
+<!-- Contact Information Section -->
+<section class="contact-info">
+<div>
+    <p>Email:</p>
+    <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a>
+</div>
+<div>
+    <p>Phone:</p>
+    <a href="tel:+911234567890">+91-1234567890</a>
+</div>
+<div>
+    <p>WhatsApp:</p>
+    <a href="https://wa.me/911234567890">Chat with us on WhatsApp</a>
+</div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form">
+<h2>Send Us a Message</h2>
+<form action="/submit-query" method="POST">
+    <label for="name">Full Name *</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address *</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number (Optional)</label>
+    <input type="tel" id="phone" name="phone">
+
+    <label for="subject">Subject *</label>
+    <select id="subject" name="subject">
+        <option>Booking Issue</option>
+        <option>General Query</option>
+        <option>Feedback</option>
+        <option>Technical Support</option>
+    </select>
+
+    <label for="message">Message *</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+</section>
+
+<!-- FAQ Section -->
+<section class="faqs">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-item">
+    <h3>How do I book a priest or puja?</h3>
+    <p>You can book by selecting a service from our homepage and following the booking process.</p>
+</div>
+<div class="faq-item">
+    <h3>What payment methods are supported?</h3>
+    <p>We support all major credit/debit cards, UPI, and net banking.</p>
+</div>
+<div class="faq-item">
+    <h3>Can I cancel or reschedule a booking?</h3>
+    <p>Yes, you can modify your booking under the "My Bookings" section.</p>
+</div>
+<div class="faq-item">
+</body>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Temples</a></li>
+                <li><a href="#">Priests</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="footer-section">
+            <h3>Legal Links</h3>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Refund & Cancellation Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <p>Email: <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a></p>
+            <p>Phone: +91-XXXXXXXXXX</p>
+            <p>Address: (Optional)</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="footer-section cta-section">
+            <p>Join 10,000+ devotees in connecting with temples and priests today!</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Copyright Notice -->
+    <div class="footer-bottom">
+        <p>© 2024 DevinePujaConnect.com. All rights reserved.</p>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temple Exploration Platform</title>
+    <style>
+         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed; /* Makes the navbar fixed at the top */
+            top: 0; /* Aligns it to the top */
+            left: 0; /* Aligns it to the left edge */
+            width: 100%; /* Ensures it spans the entire width */
+            z-index: 1000; /* Keeps it above other elements */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 7px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .navbar .logo-container img {
+            max-width: 50px;
+            height: auto;
+            margin-bottom: 2px;
+            border-radius: 50%;
+        }
+
+        .navbar .logo-container .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .menu li {
+            position: relative;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .menu a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .menu .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .menu .dropdown li {
+            width: 200px;
+        }
+
+        .navbar .menu .dropdown a {
+            display: block;
+            padding: 8px 12px;
+        }
+
+        .navbar .menu li:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .user-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .user-options a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar .user-options a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar .profile-dropdown {
+            position: relative;
+            right: 15px;
+        }
+
+        .navbar .profile-dropdown .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar .profile-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .navbar .profile-dropdown .dropdown a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar .profile-dropdown .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        /* Body section */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+        header {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 110px 20px;
+            text-align: center;
+            /* border-bottom-left-radius: 50% 10px;
+            border-bottom-right-radius: 50% 10px; */
+        }
+        header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .cta-buttons {
+            margin-top: 20px;
+        }
+        .cta-buttons button {
+            background: #fff;
+            color: #ff7e5f;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .cta-buttons button:hover {
+            background: #ff7e5f;
+            color: white;
+        }
+        .container {
+            padding: 20px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+            color: #ff7e5f;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .categories, .featured-temples {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1 1 calc(30% - 20px);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background: white;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 15px;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card h3 {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .card button {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .card button:hover {
+            background: #feb47b;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+        .steps div {
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .steps h3 {
+            font-size: 1.2rem;
+            color: #ff7e5f;
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        /* Footer Container */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f3f3f3;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Devine Puja Connect Logo">
+            <a href="#" class="logo">DevinePujaConnect</a>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="Aboutus.html">About Us</a></li>
+            <li><a href="Service.html">Services</a></li>
+            <li>
+                <a href="#">Categories</a>
+                <ul class="dropdown">
+                    <li><a href="#">Temple Pujas</a></li>
+                    <li><a href="#">At-Home Pujas</a></li>
+                    <li><a href="#">Virtual Pujas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Pujas</a>
+                <ul class="dropdown">
+                    <li><a href="#">Wedding Pujas</a></li>
+                    <li><a href="#">Griha Pravesh</a></li>
+                    <li><a href="#">Satyanarayan Puja</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Temples</a></li>
+            <li><a href="Prist_section.html">Priests</a></li>
+            <li><a href="Contact_us.html">Contact Us</a></li>
+        </ul>
+        <div class="user-options">
+            <a href="Login_signup.html">Login/Sign Up</a>
+            <div class="profile-dropdown">
+                <a href="#">Profile</a>
+                <ul class="dropdown">
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <h1>Explore Temples Across India</h1>
+        <p>Discover divine sanctuaries, learn about their history, and book pujas directly from your favorite temples.</p>
+        <div class="cta-buttons">
+            <button>Find a Temple Near Me</button>
+            <button>Book a Puja</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section categories">
+            <h2>Temple Categories</h2>
+            <div class="categories">
+                <div class="card">
+                    <img src="north_india.jpg" alt="Northern India Temples">
+                    <h3>Northern India</h3>
+                    <p>Explore temples from the majestic Himalayas.</p>
+                    <button>Explore</button>
+                </div>
+                <div class="card">
+                    <img src="south_india.jpg" alt="Southern India Temples">
+                    <h3>Southern India</h3>
+                    <p>Visit divine sanctuaries in South India.</p>
+                    <button>Explore</button>
+                </div>
+                <div class="card">
+                    <img src="shiva_temple.jpg" alt="Shiva Temples">
+                    <h3>Shiva Temples</h3>
+                    <p>Discover temples dedicated to Lord Shiva.</p>
+                    <button>Explore</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section featured-temples">
+            <h2>Featured Temples</h2>
+            <div class="featured-temples">
+                <div class="card">
+                    <img src="kedarnath.jpg" alt="Kedarnath Temple">
+                    <h3>Kedarnath Temple</h3>
+                    <p>Location: Uttarakhand</p>
+                    <p>A sacred shrine nestled in the Himalayas.</p>
+                    <p>Features: Online Puja, Darshan, Festivals</p>
+                    <button>View Details</button>
+                    <button>Book Puja</button>
+                </div>
+                <div class="card">
+                    <img src="tirupati.jpg" alt="Tirupati Temple">
+                    <h3>Tirupati Temple</h3>
+                    <p>Location: Andhra Pradesh</p>
+                    <p>Renowned for Lord Venkateswara worship.</p>
+                    <p>Features: Donations, Online Darshan</p>
+                    <button>View Details</button>
+                    <button>Book Puja</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section steps">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div>
+                    <h3>Step 1</h3>
+                    <p>Search for a temple.</p>
+                </div>
+                <div>
+                    <h3>Step 2</h3>
+                    <p>Explore its details and offerings.</p>
+                </div>
+                <div>
+                    <h3>Step 3</h3>
+                    <p>Book a puja, darshan, or other services.</p>
+                </div>
+                <div>
+                    <h3>Step 4</h3>
+                    <p>Receive confirmation and enjoy the spiritual experience.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Temples</a></li>
+                    <li><a href="#">Priests</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+    
+            <!-- Legal Links -->
+            <div class="footer-section">
+                <h3>Legal Links</h3>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund & Cancellation Policy</a></li>
+                </ul>
+            </div>
+    
+            <!-- Contact Information -->
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Email: <a href="mailto:support@devinepujaconnect.com">support@devinepujaconnect.com</a></p>
+                <p>Phone: +91-XXXXXXXXXX</p>
+                <p>Address: (Optional)</p>
+            </div>
+    
+            <!-- Social Media Links -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+    
+            <!-- Call-to-Action -->
+            <div class="footer-section cta-section">
+                <p>Join 10,000+ devotees in connecting with temples and priests today!</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    
+        <!-- Copyright Notice -->
+        <div class="footer-bottom">
+            <p>© 2024 DevinePujaConnect.com. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
